@@ -4,6 +4,7 @@ using Crestron.SimplSharpPro;
 using Crestron.SimplSharpPro.CrestronThread;                       				// For Basic SIMPL#Pro classes
 using ILiveSmart.light;
 using ILiveSmart;
+using Socket;
 namespace IliveSmart
 {
     
@@ -54,13 +55,17 @@ namespace IliveSmart
             /// </summary>
             private CrestronControlSystem _controlSystem;
             private SmartAPI logic = null;
+            UDPAPI udp = new UDPAPI();
             public override void InitializeSystem()     //逻辑代码初始化
             {
                 this.DefaultStringEncoding = eStringEncoding.eEncodingUTF16;
                 try
                 {
-
+                    udp.SendData("asas");
                     logic = new SmartAPI(this._controlSystem);
+                 
+                
+                    
 
 
                 }
