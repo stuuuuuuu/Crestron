@@ -50,7 +50,6 @@ namespace ILiveSmart {
             if (glsOirCCn_WashRoom.Register () != eDeviceRegistrationUnRegistrationResponse.Success)
                 ErrorLog.Error ("glsOirCCn_WashRoom failed registration. Cause: {0}", glsOirCCn_WashRoom.RegistrationFailureReason);
 
-            udp.SendData("192.168.188.112", 8080, "c2nicb_success");
 
             //glsOirCCn_Door = new GlsOirCCn (0x98, this.controlSystem);
             //glsOirCCn_Door.GlsOccupancySensorChange += new GlsOccupancySensorChangeEventHandler (glsOirCCn_Door_GlsOccupancySensorChange);
@@ -69,7 +68,7 @@ namespace ILiveSmart {
                     return;
                 }
                 Button button = args.Button;
-                udp.SendData("192.168.188.112", 8080, "c2nicb_BedRoom is running");
+        
                 switch (button.Number) {
                     case 2: //左上
                         {

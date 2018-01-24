@@ -78,7 +78,7 @@ namespace ILiveSmart
                                       ComPort.eComHardwareHandshakeType.ComspecHardwareHandshakeNone,
                                       ComPort.eComSoftwareHandshakeType.ComspecSoftwareHandshakeNone,
                                       false);
-            udp.SendData("192.168.188.112", 8080, "COM_success");
+    
             }
             #endregion
            
@@ -95,7 +95,7 @@ namespace ILiveSmart
                 this.myIROutputPort6 = this.controlSystem.IROutputPorts[6];
                 this.myIROutputPort7 = this.controlSystem.IROutputPorts[7];
                 this.myIROutputPort8 = this.controlSystem.IROutputPorts[8];
-                udp.SendData("192.168.188.112", 8080, "IR_success");
+            
             }
             #endregion
 
@@ -119,7 +119,7 @@ namespace ILiveSmart
 
             if (relayStudyRoomDoor.Register() != eDeviceRegistrationUnRegistrationResponse.Success)
                 ErrorLog.Error("Relay Port couldn't be registered. Cause: {0}", relayStudyRoomDoor.DeviceRegistrationFailureReason);
-            udp.SendData("192.168.188.112", 8080, "Relay_success");
+ 
             #endregion
 
         }

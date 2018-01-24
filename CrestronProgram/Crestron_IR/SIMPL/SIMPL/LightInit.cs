@@ -46,7 +46,7 @@ namespace ILiveSmart.light {
         public Din1Dim4 din1Dim4_11;
         public Din1Dim4 din1Dim4_12;
         public Din1Dim4 din1Dim4_13;
-        UDPAPI udp = new UDPAPI();
+        //UDPAPI udp = new UDPAPI();
         private CrestronControlSystem controlSystem ;
         public ILiveSmartLight (CrestronControlSystem system) {
             this.controlSystem = system;
@@ -87,7 +87,7 @@ namespace ILiveSmart.light {
             din8sw8_05.LoadStateChange += new LoadEventHandler (din8sw8_LoadStateChange);
             if (din8sw8_05.Register () != eDeviceRegistrationUnRegistrationResponse.Success)
                 ErrorLog.Error ("din8sw8_05 failed registration. Cause: {0}", din8sw8_05.RegistrationFailureReason);
-            udp.SendData("192.168.188.112", 8080, "light_success");
+     
             #endregion
         }
         #region  书房灯光全开

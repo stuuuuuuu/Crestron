@@ -23,35 +23,50 @@ namespace Socket
         {
             string host = "192.168.188.112";
             int port = 8080;
-            UDPServer client = new UDPServer();
             byte[] sendBytes = Encoding.ASCII.GetBytes(data);
             client.EnableUDPServer(host, port);
             client.SendData(sendBytes, sendBytes.Length);
             client.DisableUDPServer();
             client.Dispose();
         }
+        UDPServer client = new UDPServer();
         public void SendData(string h, int p, string data)
         {
             string host = h;
             int port = p;
             byte[] sendBytes = Encoding.ASCII.GetBytes(data);
-            UDPServer client = new UDPServer();
+            
             client.EnableUDPServer(host, port);
             client.SendData(sendBytes, sendBytes.Length);
             client.DisableUDPServer();
             client.Dispose();
 
         }
-        //public int Receive(string h, int p)
-        //{
-        //    string host = h;
-        //    int port = p;
-        //    UDPServer client = new UDPServer();
-        //    client.EnableUDPServer(host, port);
-        //    int n = 0;
-        //    //n = client.ReceiveData();
-        //    client.Dispose();
-        //    return n;
-        //}
+  
+        public void ReceiveCallback(UDPServer myUDPServer, int numberOfBytesReceived)
+        {
+
+            string host = "192.168.188.112";
+            int port = 8080;
+            myUDPServer.EnableUDPServer(host,port);
+            byte[] sendBytes = Encoding.ASCII.GetBytes("as");
+                
+      
+            myUDPServer.DisableUDPServer();
+            
+
+        }
+       
+
+
+        public void ReceiveAsync()
+        {
+    
+            UDPServer udp = new UDPServer();
+            udp.ReceiveDataAsync(ReceiveCallback);
+            
+        }
+
+      
     }
 }

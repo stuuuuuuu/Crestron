@@ -44,8 +44,7 @@ namespace IliveSmart
             CrestronEnvironment.ProgramStatusEventHandler += new ProgramStatusEventHandler(ControlSystem_ControllerProgramEventHandler);
             //定义快思聪网络事件。
             CrestronEnvironment.EthernetEventHandler += new EthernetEventHandler(ControlSystem_ControllerEthernetEventHandler);
-            light_conctrol = "ssss";
-            udp.SendData("192.168.188.112", 8080, light_conctrol);
+    
 
         }
 
@@ -56,18 +55,17 @@ namespace IliveSmart
         /// This is used to start all the user threads and create all events / mutexes etc.
         /// This function should exit ... If this function does not exit then the program will not start
         /// </summary>
-        private CrestronControlSystem _controlSystem;
+     
         private SmartAPI logicl;
-        public C2niCb c2nicb_BedRoom;
-        UDPAPI udp = new UDPAPI();
-        string light_conctrol;
+
+
+
         public override void InitializeSystem()     //逻辑代码初始化
         {
             this.DefaultStringEncoding = eStringEncoding.eEncodingUTF16;
             try
             {
-               
-                udp.SendData("192.168.188.112", 8080, "logic_init");
+   
                 logicl = new SmartAPI(this);
                
 

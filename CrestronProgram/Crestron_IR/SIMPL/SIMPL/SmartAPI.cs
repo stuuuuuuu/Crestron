@@ -12,6 +12,7 @@ using ILiveSmart;
 using ILiveSmart.light;
 using ILiveSmart.IR;
 using Socket;
+using Crestron.SimplSharp.CrestronSockets;
 namespace ILiveSmart {
     public class SmartAPI {
         private CrestronControlSystem _controlSystem ;
@@ -20,11 +21,10 @@ namespace ILiveSmart {
         private SmartIR ir ;
         private SmartInput input;
         private ILiveSmartLight Scence;
-        UDPAPI udp = new UDPAPI();
-        private CP3Smart smartExec ;
+        //\\UDPAPI udp = new \\UDPAPI();
+        private CP3Smart smartExec =null ;
         public SmartAPI (CrestronControlSystem system) {
             this._controlSystem = system;
-            udp.SendData("192.168.188.112", 8080, "init");
             this.init ();
          
         }
@@ -33,37 +33,45 @@ namespace ILiveSmart {
             CP3 = new CP3Smart (this._controlSystem);
             light = new ILiveSmartLight (this._controlSystem);
             input = new SmartInput(this._controlSystem,Scence);
-            //ir = new SmartIR(smartExec);
+         
+
+           
           
-            udp.SendData("192.168.188.112", 8080, "register");
+
             
             CP3.RegisterDevices();
 
             input.RegisterDevices();
             light.RegisterDevice();
-            udp.SendData("192.168.188.112", 8080, "IR");
-        
-            //this.ir = new SmartIR(smartExec);
-       
-            //if (udp.Receive("192.168.188.112", 8080) == 1)
-            //{
-            //    //ir.TV_Open();
-            //    udp.SendData("192.168.188.112", 8080, "5");
-                
-            //}
-            //if (udp.Receive("192.168.188.112", 8080) == 2)
-            //{
-            //    //ir.TV_Up();
-            //    udp.SendData("192.168.188.112", 8080, "6");
 
-            //}
-            //if (udp.Receive("192.168.188.112", 8080) == 3)
-            //{
-            //    //ir.TV_Down();
-            //    udp.SendData("192.168.188.112", 8080, "7");
-            //}
+            this.ir = new SmartIR(CP3);
+            
+      
+
+            new Thread(new ThreadCallbackFunction(this.Receive), this, Thread.eThreadStartOptions.Running);
 
         }
+  
+       
+        public object Receive(object o)
+        {
+
+            //\\UDPAPI a = new \\UDPAPI();
+            this.ir.TV_Open();
+            Thread.Sleep(500);
+            this.ir.Rx_Open();
+            Thread.Sleep(500);
+            this.ir.DVD_Open();
+           
+           
+            
+            //Thread.Sleep(500);
+        
+            //a.ReceiveAsync();
+                
+            return o;
+        }
+     
       
 
 
